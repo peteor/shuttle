@@ -9,6 +9,7 @@ CACHE:
 
 #internal HTML documents
 
+index.html
 
 #style sheets
 css/topcoat-mobile-light.min.css
