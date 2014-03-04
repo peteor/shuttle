@@ -11,17 +11,17 @@ CACHE:
 
 
 #style sheets
-/css/topcoat-mobile-light.min.css
+css/topcoat-mobile-light.min.css
 
 #style sheet images
 
 
 #javascript files
-/js/helpers.js
-/js/dates.js
-/js/jquery-2.1.0.min.js
-/js/underscore.js
-/js/app.js
+js/helpers.js
+js/dates.js
+js/jquery-2.1.0.min.js
+js/underscore.js
+js/app.js
 
 NETWORK:
 *
