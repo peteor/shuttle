@@ -1,8 +1,6 @@
 var Router = Backbone.Router.extend({
   routes: {
-    'stops/:id'   : 'getStop',
-    'stops'       : 'getAllStops',
-    'location/:id': 'getLocation',
+    'stop/:id': 'getStop',
     ''            : 'home'
   } 
 });
@@ -11,22 +9,16 @@ var router = new Router();
 
 router.on('route:home', function () {
   console.log("home");
- // renderHomePage();
+  renderDestinations();
 });
 
-router.on('route:getLocation', function (id) {
-  console.log("get locaiton");
-});
-
-router.on('route:getAllStops', function () {
- console.log("get all stops");
-});
 
 router.on('route:getStop', function (id) {
-  console.log("get stop");
+  console.log("Load stop: " + id);
+  renderStop(id);
 });
 
 
 
-Backbone.history.start();
+
 

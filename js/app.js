@@ -97,19 +97,15 @@ var royalViewStops = [
 
 var tseunWanMTR = {
     name: "Tseun Wan MTR",
-    route: "tsuen-wan-mtr",
     stops: tseunWanMTRStops
     };
 
 var royalView = {
     name: "Royal View Hotel",
-    route: "royal-view",
     stops: royalViewStops
     };
 
-// Populate app data structure
 
-var arDestinations = [tseunWanMTR, royalView];
 
 
 // loop through the stops and find  the next one
@@ -149,24 +145,53 @@ function parseStopTime(stopTime) {
     return dStop.getTime();
 }
 
+/* 
+    nextBusAt: returns the time of the next bus
+*/
+function nextBusAt (arStops)  {
+    var arNextStop = getNextStops(arStops);
+    var nextBus = arNextStop[0].time;
+    console.log(nextBus);
+    return nextBus;
+}
+
+
+// App module
+
+var shuttleApp = {
+    arDestinations : [tseunWanMTR, royalView]
+};
+
+
 // handle rendering of HTML
 
-// Run the app
+function renderDestinations() {
 
+    console.log("Rendering destinations");
+    var destinationsTemplate = $("#destination-template").html();
+    $("#destination-container").html(_.template(destinationsTemplate, {arDestinations:shuttleApp.arDestinations}));
+}
+
+function renderStop(id) {
+    console.log("rendering stop");
+    var stopsTemplate = $("#stop-template").html();
+    var nextStops = getNextStops(shuttleApp.arDestinations[id].stops);
+    var stopName = shuttleApp.arDestinations[id].name;
+    $("#stop-container").html(_.template(stopsTemplate, {arCurrentStops:nextStops,stopName:stopName})); 
+}
+
+// Run the app
 $(function () {
-    var oCurrentDestination = arDestinations[0];
+    Backbone.history.start();
+
+    var tt = new TopcoatTouch();
+    
+    /*
+    var oCurrentDestination = shuttleApp.arDestinations[0];
     var arCurrentStops = oCurrentDestination["stops"];
     arCurrentStops =  getNextStops(arCurrentStops); // This gets the stops that are after now.
-
-    var stopsTemplate = $("#stop-template").html();
-    var destinationsTemplate = $("#destination-template").html();
-
-    $("#stop-container").html(_.template(stopsTemplate, {arCurrentStops:arCurrentStops}));   
-    $("#destination-container").html(_.template(destinationsTemplate, {arDestinations:arDestinations}));
-
     // bunging everything on page so app is usable quickly
-
     // Royal View stop
      $("#rv-stop-container").html(_.template(stopsTemplate, {arCurrentStops:  getNextStops(royalViewStops)}));
-
+    */
 });

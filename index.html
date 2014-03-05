@@ -6,13 +6,20 @@
   <meta name="viewport" content="width=device-width">
   <title>Bus Timetable</title>
   <link rel="stylesheet" href="css/topcoat-mobile-light.min.css">
+  <link href="css/topcoat-touch.css" rel="stylesheet">
+
   <script src="js/helpers.js"></script>
   <script src="js/dates.js"></script>
   <script src="js/lib/jquery-2.1.0.min.js"></script>
+  <script src="js/lib/topcoat-touch.js"></script>
+  <script src="js/lib/iscroll.js"></script>
+  <script src="js/lib/hammer.js"></script>
+  <script src="js/lib/fastclick.js"></script>
   <script src="js/lib/underscore-min.js"></script>
   <script src="js/lib/backbone-min.js"></script>
-  <script src="js/routers/router.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
+  <script src="js/routers/router.js" ></script>
+
 
   <!-- Web app meta tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,48 +38,79 @@
 
 </head>
 <body>
-
-  <div class="topcoat-navigation-bar">
-    <div class="topcoat-navigation-bar__item center full">
-      <h1 class="topcoat-navigation-bar__title">Bus times</h1>
+  <div class="page page-center" id="home">
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet back-button" href="#">
+         Back
+       </a>
+     </div>
+     <div class="topcoat-navigation-bar__item center half">
+      <h1 class="topcoat-navigation-bar__title">Bus Schedule</h1>
     </div>
   </div>
+  <div id="destination-container" >
+  </div>
+</div>
 
-  <div class="topcoat-list">
-      <h3 class="topcoat-list__header">Destinations</h3>
-      <ul class="topcoat-list__container" id="destination-container">
-      </ul>
+<div id="stop-page">
+  <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet back-button" href="#">
+         Back
+       </a>
+     </div>
+     <div class="topcoat-navigation-bar__item center half">
+      <h1 class="topcoat-navigation-bar__title">Stop Details</h1>
     </div>
-
-    <div class="topcoat-list">
-      <h3 class="topcoat-list__header">Royal View</h3>
-      <ul class="topcoat-list__container" id="rv-stop-container">
-      </ul>
-    </div>
-
-
-    <div class="topcoat-list">
-      <h3 class="topcoat-list__header">Tseun Wan MTR</h3>
-      <ul class="topcoat-list__container" id="stop-container">
-      </ul>
-    </div>
-
-    <script type="text/html" id='destination-template'>  
-    <% _.each(arDestinations,function(dest,key,list){ %>
-      <li class="topcoat-list__item">
-      <%= dest.name %>
-      </li>
-      <% }) %>
-    </script>
-
-    <script type="text/html" id='stop-template'>  
-    <% _.each(arCurrentStops,function(stop,key,list){ %>
-      <li class="topcoat-list__item">
-      <%= stop.time %>
-      </li>
-      <% }) %>
-    </script>
+  </div>
+<div id="stop-container">
+  vcdskcmslkdm
+</div>
+</div>
 
 
-  </body>
-  </html>
+<script type="text/html" id='destination-template'>
+<div class="topcoat-list">
+<h3 class="topcoat-list__header">Destinations</h3>
+<ul class="topcoat-list__container" id="destination-container">
+
+<% _.each(arDestinations,function(dest,key,list){ %>
+  <li class="topcoat-list__item">
+  <a href="#/stop/<%= key %>" data-rel="stop-page"><%= dest.name %></a><br /> Next bus at  <em><%= nextBusAt(arDestinations[key].stops) %></em>
+  </li>
+  <% }) %>
+</ul>
+</div>
+</script>
+
+<script type="text/html" id='stop-template'>
+<div class="topcoat-list">
+<h3 class="topcoat-list__header"><%= stopName %></h3>
+<ul class="topcoat-list__container" id="stop-container">
+<% _.each(arCurrentStops,function(stop,key,list){ %>
+  <li class="topcoat-list__item">
+  <%= stop.time %>
+  </li>
+  <% }) %>
+</ul>
+</div>
+</script>
+
+<script  type="text/html" id="header-template" >
+
+<div class="topcoat-navigation-bar__item left quarter">
+<a class="topcoat-icon-button--quiet back-button" href="#">
+<span class="topcoat-icon topcoat-icon--back"></span>
+</a>
+</div>
+<div class="topcoat-navigation-bar__item center half">
+<h1 class="topcoat-navigation-bar__title">Employee</h1>
+</div>
+
+
+</script>
+
+
+</body>
+</html>
