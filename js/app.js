@@ -1,5 +1,3 @@
-/*
-*/
 
 // Create app data
 
@@ -191,12 +189,5 @@ window.addEventListener('load', function () {
 
 $(function () {
     Backbone.history.start();
-    /*
-    var oCurrentDestination = shuttleApp.arDestinations[0];
-    var arCurrentStops = oCurrentDestination["stops"];
-    arCurrentStops =  getNextStops(arCurrentStops); // This gets the stops that are after now.
-    // bunging everything on page so app is usable quickly
-    // Royal View stop
-     $("#rv-stop-container").html(_.template(stopsTemplate, {arCurrentStops:  getNextStops(royalViewStops)}));
-    */
+
 });
