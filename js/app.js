@@ -149,6 +149,8 @@ function parseStopTime(stopTime) {
     return dStop.getTime();
 }
 
+// handle rendering of HTML
+
 // Run the app
 
 $(function () {
