@@ -4,79 +4,75 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width">
-	<title>Bus Timetable</title>
-	<link rel="stylesheet" href="css/topcoat-mobile-light.min.css">
-	<script src="js/helpers.js"></script>
-	<script src="js/dates.js"></script>
-  <script src="js/jquery-2.1.0.min.js"></script>
-  <script src="js/underscore.js"></script>
+  <title>Bus Timetable</title>
+  <link rel="stylesheet" href="css/topcoat-mobile-light.min.css">
+  <script src="js/helpers.js"></script>
+  <script src="js/dates.js"></script>
+  <script src="js/lib/jquery-2.1.0.min.js"></script>
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/backbone-min.js"></script>
+  <script src="js/routers/router.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
+
   <!-- Web app meta tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
 
-<!-- Android web app icon -->
-<link rel="shortcut icon" sizes="196x196" href="nice-highres.png">
+  <!-- Android web app icon -->
+  <link rel="shortcut icon" sizes="196x196" href="nice-highres.png">
 
-<!-- Apple web app icon -->
-<link rel="apple-touch-icon" href="touch-icon-iphone.png">
-<!-- Optional Apple web app icon -->
-<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
-<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
-<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+  <!-- Apple web app icon -->
+  <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+
+  <!-- Optional Apple web app icon -->
+  <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
 
 </head>
 <body>
 
-<div class="topcoat-navigation-bar">
+  <div class="topcoat-navigation-bar">
     <div class="topcoat-navigation-bar__item center full">
-        <h1 class="topcoat-navigation-bar__title">Bus times</h1>
+      <h1 class="topcoat-navigation-bar__title">Bus times</h1>
     </div>
-</div>
+  </div>
+
+  <div class="topcoat-list">
+      <h3 class="topcoat-list__header">Destinations</h3>
+      <ul class="topcoat-list__container" id="destination-container">
+      </ul>
+    </div>
+
+    <div class="topcoat-list">
+      <h3 class="topcoat-list__header">Royal View</h3>
+      <ul class="topcoat-list__container" id="rv-stop-container">
+      </ul>
+    </div>
 
 
-<div class="topcoat-tab-bar full">
+    <div class="topcoat-list">
+      <h3 class="topcoat-list__header">Tseun Wan MTR</h3>
+      <ul class="topcoat-list__container" id="stop-container">
+      </ul>
+    </div>
+
+    <script type="text/html" id='destination-template'>  
+    <% _.each(arDestinations,function(dest,key,list){ %>
+      <li class="topcoat-list__item">
+      <%= dest.name %>
+      </li>
+      <% }) %>
+    </script>
+
+    <script type="text/html" id='stop-template'>  
+    <% _.each(arCurrentStops,function(stop,key,list){ %>
+      <li class="topcoat-list__item">
+      <%= stop.time %>
+      </li>
+      <% }) %>
+    </script>
 
 
-
-
-<div class="topcoat-list" style="width:50%; display:inline-block;vertical-align:top;">
-  <h3 class="topcoat-list__header">Royal View</h3>
-  <ul class="topcoat-list__container" id="rv-stop-container">
-  </ul>
-</div>
-
-
-<div class="topcoat-list" style="width:50%; display:inline-block;vertical-align:top;">
-  <h3 class="topcoat-list__header">Tseun Wan MTR</h3>
-  <ul class="topcoat-list__container" id="stop-container">
-  </ul>
-</div>
-
-
-<div class="topcoat-list" style="display:none;">
-  <h3 class="topcoat-list__header">Destinations</h3>
-  <ul class="topcoat-list__container" id="destination-container">
-  </ul>
-</div>
-
-
-<script type="text/html" id='destination-template'>  
-<% _.each(arDestinations,function(dest,key,list){ %>
-  <li class="topcoat-list__item">
-    <%= dest.name %>
-  </li>
-<% }) %>
-</script>
-
-<script type="text/html" id='stop-template'>  
-<% _.each(arCurrentStops,function(stop,key,list){ %>
-  <li class="topcoat-list__item">
-    <%= stop.time %>
-  </li>
-<% }) %>
-</script>
-
-
-</body>
-</html>
+  </body>
+  </html>
