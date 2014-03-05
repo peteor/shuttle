@@ -6,17 +6,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Bus Timetable</title>
   <link rel="stylesheet" href="css/topcoat-mobile-light.min.css">
-  <script src="js/helpers.js"></script>
-  <script src="js/dates.js"></script>
-  <script src="js/lib/jquery-2.1.0.min.js"></script>
-  <script src="js/lib/iscroll.js"></script>
-  <script src="js/lib/hammer.js"></script>
-  <script src="js/lib/fastclick.js"></script>
-  <script src="js/lib/underscore-min.js"></script>
-  <script src="js/lib/backbone-min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/routers/router.js" ></script>
-
+  <link rel="stylesheet" href="css/pageslider.css">
 
   <!-- Web app meta tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,79 +25,76 @@
 
 </head>
 <body>
-  <div class="page page-center" id="home">
-    <div class="topcoat-navigation-bar">
-      <div class="topcoat-navigation-bar__item left quarter">
-        <a class="topcoat-icon-button--quiet back-button" href="#">
-         Back
-       </a>
-     </div>
-     <div class="topcoat-navigation-bar__item center half">
-      <h1 class="topcoat-navigation-bar__title">Bus Schedule</h1>
-    </div>
+
+  <div id="destination-page" class="page page-center">
+  </div>
+  <div id="stop-page" class="page">
+  </div>
+
+
+  <script type="text/html" id='destination-template'>
+  <div class="topcoat-navigation-bar">
+  <div class="topcoat-navigation-bar__item left quarter">
+  <a class="topcoat-icon-button--quiet back-button" href="#">
+  Back
+  </a>
+  </div>
+  <div class="topcoat-navigation-bar__item center half">
+  <h1 class="topcoat-navigation-bar__title">Bus Schedule</h1>
+  </div>
   </div>
   <div id="destination-container" >
+  <div class="topcoat-list">
+  <h3 class="topcoat-list__header">Destinations</h3>
+  <ul class="topcoat-list__container" id="destination-container">
+  <% _.each(arDestinations,function(dest,key,list){ %>
+    <li class="topcoat-list__item">
+    <a href="#/stop/<%= key %>" data-rel="stop-page"><%= dest.name %></a><br /> Next bus at  <em><%= nextBusAt(arDestinations[key].stops) %></em>
+    </li>
+    <% }) %>
+  </ul>
   </div>
-</div>
+  </div>
 
-<div id="stop-page">
+  </script>
+
+  <script type="text/html" id='stop-template'>
+
   <div class="topcoat-navigation-bar">
-      <div class="topcoat-navigation-bar__item left quarter">
-        <a class="topcoat-icon-button--quiet back-button" href="#">
-         Back
-       </a>
-     </div>
-     <div class="topcoat-navigation-bar__item center half">
-      <h1 class="topcoat-navigation-bar__title">Stop Details</h1>
-    </div>
+  <div class="topcoat-navigation-bar__item left quarter">
+  <a class="topcoat-icon-button--quiet back-button" href="#">
+  Back
+  </a>
   </div>
-<div id="stop-container">
-  vcdskcmslkdm
-</div>
-</div>
+  <div class="topcoat-navigation-bar__item center half">
+  <h1 class="topcoat-navigation-bar__title">Stop Details</h1>
+  </div>
+  </div>
+  <div id="stop-container">
+  <div class="topcoat-list">
+  <h3 class="topcoat-list__header"><%= stopName %></h3>
+  <ul class="topcoat-list__container" id="stop-container">
+  <% _.each(arCurrentStops,function(stop,key,list){ %>
+    <li class="topcoat-list__item">
+    <%= stop.time %>
+    </li>
+    <% }) %>
+  </ul>
+  </div>
+  </div>
+  </script>
 
-
-<script type="text/html" id='destination-template'>
-<div class="topcoat-list">
-<h3 class="topcoat-list__header">Destinations</h3>
-<ul class="topcoat-list__container" id="destination-container">
-
-<% _.each(arDestinations,function(dest,key,list){ %>
-  <li class="topcoat-list__item">
-  <a href="#/stop/<%= key %>" data-rel="stop-page"><%= dest.name %></a><br /> Next bus at  <em><%= nextBusAt(arDestinations[key].stops) %></em>
-  </li>
-  <% }) %>
-</ul>
-</div>
-</script>
-
-<script type="text/html" id='stop-template'>
-<div class="topcoat-list">
-<h3 class="topcoat-list__header"><%= stopName %></h3>
-<ul class="topcoat-list__container" id="stop-container">
-<% _.each(arCurrentStops,function(stop,key,list){ %>
-  <li class="topcoat-list__item">
-  <%= stop.time %>
-  </li>
-  <% }) %>
-</ul>
-</div>
-</script>
-
-<script  type="text/html" id="header-template" >
-
-<div class="topcoat-navigation-bar__item left quarter">
-<a class="topcoat-icon-button--quiet back-button" href="#">
-<span class="topcoat-icon topcoat-icon--back"></span>
-</a>
-</div>
-<div class="topcoat-navigation-bar__item center half">
-<h1 class="topcoat-navigation-bar__title">Employee</h1>
-</div>
-
-
-</script>
-
+  <script src="js/helpers.js"></script>
+  <script src="js/dates.js"></script>
+  <script src="js/lib/jquery-2.1.0.min.js"></script>
+  <script src="js/lib/iscroll.js"></script>
+  <script src="js/lib/hammer.js"></script>
+  <script src="js/lib/fastclick.js"></script>
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/backbone-min.js"></script>
+  <script src="js/lib/pageslider.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/routers/router.js" ></script>
 
 </body>
 </html>

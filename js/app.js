@@ -169,7 +169,9 @@ function renderDestinations() {
 
     console.log("Rendering destinations");
     var destinationsTemplate = $("#destination-template").html();
-    $("#destination-container").html(_.template(destinationsTemplate, {arDestinations:shuttleApp.arDestinations}));
+    $("#destination-page").html(_.template(destinationsTemplate, {arDestinations:shuttleApp.arDestinations}));
+
+     shuttleApp.slider.slidePage($("#destination-page"));
 }
 
 function renderStop(id) {
@@ -177,15 +179,18 @@ function renderStop(id) {
     var stopsTemplate = $("#stop-template").html();
     var nextStops = getNextStops(shuttleApp.arDestinations[id].stops);
     var stopName = shuttleApp.arDestinations[id].name;
-    $("#stop-container").html(_.template(stopsTemplate, {arCurrentStops:nextStops,stopName:stopName})); 
+    $("#stop-page").html(_.template(stopsTemplate, {arCurrentStops:nextStops,stopName:stopName})); 
+    shuttleApp.slider.slidePage($("#stop-page"));
 }
 
 // Run the app
+
+window.addEventListener('load', function () {
+    new FastClick(document.body);
+}, false);
+
 $(function () {
     Backbone.history.start();
-
-    var tt = new TopcoatTouch();
-    
     /*
     var oCurrentDestination = shuttleApp.arDestinations[0];
     var arCurrentStops = oCurrentDestination["stops"];
