@@ -72,6 +72,8 @@ var royalViewStops = [
     {time: "14:00"},
     {time: "14:15"},
     {time: "14:45"},
+    {time: "15:15"},
+    {time: "15:45"},
     {time: "16:15"},
     {time: "16:40"},
     {time: "17:00"},
@@ -157,7 +159,7 @@ function nextBusAt (arStops)  {
 // App module
 
 var shuttleApp = {
-    arDestinations : [tseunWanMTR, royalView]
+    arDestinations : [royalView,tseunWanMTR]
 };
 
 
@@ -166,28 +168,38 @@ var shuttleApp = {
 function renderDestinations() {
 
     console.log("Rendering destinations");
-    var destinationsTemplate = $("#destination-template").html();
-    $("#destination-page").html(_.template(destinationsTemplate, {arDestinations:shuttleApp.arDestinations}));
+    renderView("#destination-template",{arDestinations:shuttleApp.arDestinations});
+}
 
-     shuttleApp.slider.slidePage($("#destination-page"));
+
+function renderView (templateId, data) {
+    $div = $('<div></div>');
+    $("body").append($div);
+    var template = $(templateId).html();
+    $div.html(_.template(template, data));
+    shuttleApp.slider.slidePage($div);
+
 }
 
 function renderStop(id) {
     console.log("rendering stop");
-    var stopsTemplate = $("#stop-template").html();
-    var nextStops = getNextStops(shuttleApp.arDestinations[id].stops);
+    // Prepare data
+    var nextStops = shuttleApp.arDestinations[id].stops;
     var stopName = shuttleApp.arDestinations[id].name;
-    $("#stop-page").html(_.template(stopsTemplate, {arCurrentStops:nextStops,stopName:stopName})); 
-    shuttleApp.slider.slidePage($("#stop-page"));
+    // Render
+    renderView("#stop-template",{arCurrentStops:nextStops,stopName:stopName});
+    var myScroll = new IScroll('.app--body__scroll');
+
+
 }
 
 // Run the app
 
-window.addEventListener('load', function () {
-    new FastClick(document.body);
-}, false);
 
 $(function () {
-    Backbone.history.start();
+    Backbone.history.start(); 
+    new FastClick(document.body);
+   
+
 
 });

@@ -49,7 +49,8 @@ function PageSlider(container) {
         page.attr("class", "page " + from);
 
         currentPage.one('webkitTransitionEnd', function(e) {
-            $(e.target).html("");
+             $(e.target).remove();
+         
         });
 
         // Force reflow. More information here: http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/

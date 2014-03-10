@@ -4,7 +4,7 @@ var Router = Backbone.Router.extend({
     ''            : 'home'
   } ,
    initialize: function () {
-       shuttleApp.slider = new PageSlider($('body'));
+       shuttleApp.slider = new PageSlider($("#container"));
     }
 });
 

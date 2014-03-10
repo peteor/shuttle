@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html manifest="manifest.appcache"/>
+<!--<html manifest="manifest.appcache"/>-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <title>Bus Timetable</title>
   <link rel="stylesheet" href="css/topcoat-mobile-light.min.css">
   <link rel="stylesheet" href="css/pageslider.css">
@@ -24,25 +24,29 @@
   <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
 
 </head>
-<body>
+<body >
+<div id="container">
 
-  <div id="destination-page" class="page page-center">
-  </div>
-  <div id="stop-page" class="page">
-  </div>
+</div>
 
 
+
+  
   <script type="text/html" id='destination-template'>
+
+  <div class="app--header">
   <div class="topcoat-navigation-bar">
   
   <div class="topcoat-navigation-bar__item center full">
   <h1 class="topcoat-navigation-bar__title">Bus Schedule</h1>
   </div>
   </div>
+  </div>
+  <div class="app--body">
   <div id="destination-container" >
   <div class="topcoat-list">
   <h3 class="topcoat-list__header">Destinations</h3>
-  <ul class="topcoat-list__container" id="destination-container">
+  <ul class="topcoat-list__container">
   <% _.each(arDestinations,function(dest,key,list){ %>
     <li class="topcoat-list__item">
     <a href="#/stop/<%= key %>" data-rel="stop-page"><%= dest.name %></a><br /> Next bus at  <em><%= nextBusAt(arDestinations[key].stops) %></em>
@@ -51,11 +55,12 @@
   </ul>
   </div>
   </div>
+   </div>
 
   </script>
 
   <script type="text/html" id='stop-template'>
-
+ <div class="app--header">
   <div class="topcoat-navigation-bar">
   <div class="topcoat-navigation-bar__item left quarter">
   <a class="topcoat-icon-button--quiet back-button" href="#">
@@ -66,16 +71,21 @@
   <h1 class="topcoat-navigation-bar__title"><%= stopName %>: Stop Details</h1>
   </div>
   </div>
+  </div>
+  <div class="app--body app--body__scroll">
   <div id="stop-container">
   <div class="topcoat-list">
   <h3 class="topcoat-list__header"><%= stopName %></h3>
-  <ul class="topcoat-list__container" id="stop-container">
+  <div class="topcoat-list__container ">
+  <ul class="topcoat-list ">
   <% _.each(arCurrentStops,function(stop,key,list){ %>
     <li class="topcoat-list__item">
     <%= stop.time %>
     </li>
     <% }) %>
   </ul>
+  </div>
+  </div>
   </div>
   </div>
   </script>
@@ -89,6 +99,7 @@
   <script src="js/lib/underscore-min.js"></script>
   <script src="js/lib/backbone-min.js"></script>
   <script src="js/lib/pageslider.js"></script>
+  <script src="js/lib/iscroll.js"></script>
   <script src="js/app.js"></script>
   <script src="js/routers/router.js" ></script>
 
