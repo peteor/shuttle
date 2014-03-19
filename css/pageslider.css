@@ -48,7 +48,8 @@
 
   
 .app--body__scroll {
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling:touch;
+    overflow-y:scroll;
     position: absolute;
     width: 100%;bottom:0;
 }

@@ -1,118 +1,4 @@
 
-// Create app data
-
-var tseunWanMTRStops = [
-    {time: "07:10"},
-    {time: "07:30"},
-    {time: "07:50"},
-    {time: "08:10"},
-    {time: "08:25"},
-    {time: "08:40"},
-    {time: "08:55"},
-    {time: "09:10"},
-    {time: "09:25"},
-    {time: "09:55"},
-    {time: "10:25"},
-    {time: "10:55"},
-    {time: "11:25"},
-    {time: "11:55"},
-    {time: "12:10"},
-    {time: "12:40"},
-    {time: "13:10"},
-    {time: "13:25"},
-    {time: "13:40"},
-    {time: "13:55"},
-    {time: "14:10"},
-    {time: "14:25"},
-    {time: "14:55"},
-    {time: "15:25"},
-    {time: "15:55"},
-    {time: "16:25"},
-    {time: "16:55"},
-    {time: "17:10"},
-    {time: "17:40"},
-    {time: "18:10"},
-    {time: "18:30"},
-    {time: "18:50"},
-    {time: "19:10"},
-    {time: "19:30"},
-    {time: "19:50"},
-    {time: "20:10"},
-    {time: "20:25"},
-    {time: "20:40"},
-    {time: "20:55"},
-    {time: "21:10"},
-    {time: "21:25"},
-    {time: "21:40"},
-    {time: "22:10"},
-    {time: "22:35"},
-    {time: "22:40"}
-  ];
-
-var royalViewStops = [
-    {time: "07:00"},
-    {time: "07:20"},
-    {time: "07:40"},
-    {time: "08:00"},
-    {time: "08:15"},
-    {time: "08:30"},
-    {time: "08:45"},
-    {time: "09:00"},
-    {time: "09:15"},
-    {time: "10:15"},
-    {time: "10:45"},
-    {time: "11:15"},
-    {time: "11:45"},
-    {time: "12:00"},
-    {time: "12:30"},
-    {time: "13:00"},
-    {time: "13:15"},
-    {time: "13:30"},
-    {time: "13:45"},
-    {time: "14:00"},
-    {time: "14:15"},
-    {time: "14:45"},
-    {time: "15:15"},
-    {time: "15:45"},
-    {time: "16:15"},
-    {time: "16:40"},
-    {time: "17:00"},
-    {time: "17:30"},
-    {time: "18:00"},
-    {time: "18:20"},
-    {time: "18:40"},
-    {time: "19:00"},
-    {time: "19:20"},
-    {time: "19:40"},
-    {time: "20:00"},
-    {time: "20:15"},
-    {time: "20:30"},
-    {time: "20:45"},
-    {time: "21:00"},
-    {time: "21:15"},
-    {time: "21:30"},
-    {time: "22:00"},
-    {time: "22:30"},
-  ];
-
-var tseunWanMTR = {
-    name: "Tseun Wan MTR",
-    stops: tseunWanMTRStops
-    };
-
-var royalView = {
-    name: "Royal View Hotel",
-    stops: royalViewStops
-    };
-
-
-
-
-// loop through the stops and find  the next one
-// put all stops into an array 
-
-
-
 /*
   isAfterTime
   filter function which compares the time of the current stop to the current date
@@ -130,7 +16,7 @@ function isAfterTime(element, index, array) {
 */
 
 function getNextStops(arStops) {
-    var arStopsFiltered =  arStops.filter(isAfterTime);
+    var arStopsFiltered = arStops.filter(isAfterTime);
     return arStopsFiltered;
 }
 
@@ -139,46 +25,143 @@ function getNextStops(arStops) {
 */
 
 function parseStopTime(stopTime) {
-    var arStopTime = stopTime.split(":");
-    var dStop   = createStop(arStopTime[0],arStopTime[1]);
-    // console.log("parseStopTime: " + dStop.getTime());
+    try 
+    {
+     var arStopTime = stopTime.split(":");
+    } 
+    catch(err)
+    {
+        console.log(err)
+        return false; 
+    }
+
+    var dStop = createStop(arStopTime[0], arStopTime[1]);
     return dStop.getTime();
 }
 
 /* 
     nextBusAt: returns the time of the next bus
-*/
-function nextBusAt (arStops)  {
+    */
+function nextBusAt(arStops) {
     var arNextStop = getNextStops(arStops);
-    var nextBus = arNextStop[0].time;
-    console.log(nextBus);
+     var nextBus = "";
+    try 
+    {
+        nextBus = arNextStop[0].time;
+        console.log(nextBus);
+    } 
+    catch (err)
+    {
+        nextBus = "";
+    }
     return nextBus;
 }
+
+
+function upcomingTimes(arStops) {
+    var arNextStop = getNextStops(arStops);
+    var arNextBus = [];
+    var nextTime = "";
+    if (arNextStop.length == 0)
+    {
+        nextTime = ": No more busses today";
+    } 
+    else
+    {
+        try
+        { 
+            for (i = 0; i < arNextStop.length; i++) 
+            {
+                arNextBus.push(arNextStop[i].time);
+            }
+            nextTime = "<div class=\"horiz--scroll\"><ul class=\"nextbusses--grid\">";
+            for (i = 0; i < arNextBus.length; i++)
+            {
+                nextTime += "<li class=\"nextbusses--grid--item\">" + arNextBus[i] + "</li>";
+            }
+            nextTime += "</ul></div>";
+        } 
+        catch (err)
+        {
+            console.log(err);
+        }
+    }
+    return nextTime;
+}
+
 
 
 // App module
 
 var shuttleApp = {
-    arDestinations : [royalView,tseunWanMTR]
+    arDestinations: [royalView, tseunWanMTR]
 };
 
 
 // handle rendering of HTML
 
 function renderDestinations() {
-
     console.log("Rendering destinations");
-    renderView("#destination-template",{arDestinations:shuttleApp.arDestinations});
+    renderView("#destination-template", {
+        arDestinations: shuttleApp.arDestinations
+    },doCountDown);
+    // Handle countdown
+     function doCountDown () { 
+        $(".js-countdown:contains(':')").each(function() {
+        var $theCountdown = $(this);
+        var arTimeToCountDownFrom = $theCountdown.html().split(":");
+        // hacky hack
+        try
+        {
+            var deadline = createStop(arTimeToCountDownFrom[0], arTimeToCountDownFrom[1]);
+        } 
+        catch (err)
+        {
+            setTimeout(function(){doCountDown},3000);
+            return;
+        }
+        var cnt = countdown(deadline, null, countdown.MINUTES | countdown.SECONDS);
+
+        if (cnt.minutes >= 1)
+        {
+            var cntToDisplay = cnt.minutes + " min";
+        }
+        else
+        {
+            var cntToDisplay = cnt.seconds + " sec";
+        }
+
+        $theCountdown.html(cntToDisplay);
+        setInterval(function() {
+      
+            var cnt = countdown(deadline, null, countdown.MINUTES | countdown.SECONDS);
+            if (cnt.minutes >= 1) {
+                var cntToDisplay = cnt.minutes + " min";
+            } else {
+                var cntToDisplay = cnt.seconds + " sec";
+                // hack to refresh app
+                if (cnt.seconds == 0) {
+                    console.log("re-rendering home page");
+                    shouldrefresh = true; 
+                    renderDestinations();
+                }
+            }
+
+            $theCountdown.html(cntToDisplay);
+        }, 1000);
+    });
+    }
 }
 
-
-function renderView (templateId, data) {
+function renderView(templateId, data, callback) {
     $div = $('<div></div>');
     $("body").append($div);
     var template = $(templateId).html();
     $div.html(_.template(template, data));
     shuttleApp.slider.slidePage($div);
-
+    if(typeof callback !== 'undefined'){
+     callback();
+   };
 }
 
 function renderStop(id) {
@@ -187,19 +170,88 @@ function renderStop(id) {
     var nextStops = shuttleApp.arDestinations[id].stops;
     var stopName = shuttleApp.arDestinations[id].name;
     // Render
-    renderView("#stop-template",{arCurrentStops:nextStops,stopName:stopName});
-    var myScroll = new IScroll('.app--body__scroll');
-
-
+    renderView("#stop-template", {
+        arCurrentStops: nextStops,
+        stopName: stopName
+    });
+    // var myScroll = new IScroll('.app--body__scroll');
 }
+
+
+// Time methods
+
+function initTime() {
+    updateTime();
+    window.setInterval(updateTime, 1000);
+}
+
+
+function updateTime() {
+    var appTime = document.getElementsByClassName("js-time");
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var currentMin = currentTime.getMinutes();
+    var minutes = (currentMin < 10) ? "0" + currentMin : currentMin;
+    appTime[0].innerText = hours + " : " + minutes;
+}
+
+// Visibility toggle 
+
+function getHiddenProp(){
+    var prefixes = ['webkit','moz','ms','o'];
+    
+    // if 'hidden' is natively supported just return it
+    if ('hidden' in document) return 'hidden';
+    
+    // otherwise loop over all the known prefixes until we find one
+    for (var i = 0; i < prefixes.length; i++){
+        if ((prefixes[i] + 'Hidden') in document) 
+            return prefixes[i] + 'Hidden';
+    }
+
+    // otherwise it's not supported
+    return null;
+}
+// use the property name to generate the prefixed event name
+var visProp = getHiddenProp();
+if (visProp) {
+  var evtname = visProp.replace(/[H|h]idden/,'') + 'visibilitychange';
+  document.addEventListener(evtname, visChange);
+}
+
+function isHidden() {
+    var prop = getHiddenProp();
+    if (!prop) return false;
+    
+    return document[prop];
+}
+
+function visChange() {
+
+      if (!isHidden())
+      {
+        renderDestinations();
+        initTime();
+      }
+}
+
+////////////////////////////////////////////////////
 
 // Run the app
 
+if (window.applicationCache) {
+    applicationCache.addEventListener('updateready', function() {
+        if (confirm('An update is available. Reload now?')) {
+            window.location.reload();
+        }
+    });
+}
 
-$(function () {
-    Backbone.history.start(); 
+
+$(function() {
+    Backbone.history.start();
     new FastClick(document.body);
-   
-
-
+    initTime();
 });
+
+

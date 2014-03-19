@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version 1.2 3-1-2014----
+###!!!!!!!!!!!!!!!
 
 CACHE:
 
@@ -8,21 +8,37 @@ CACHE:
 
 
 #internal HTML documents
-
-##index.html
+index.html
 
 #style sheets
-##css/topcoat-mobile-light.min.css
+css/pageslider.css
+css/shuttle.css
+css/topcoat-mobile-dark.min.css
 
 #style sheet images
 
+img/hamburger_light.svg
+img/search.svg
 
 #javascript files
-##js/helpers.js
-##js/dates.js
-##js/jquery-2.1.0.min.js
-##js/underscore.js
-##js/app.js
+
+js/helpers.js
+js/dates.js
+js/lib/jquery-2.1.0.min.js
+js/lib/iscroll.js
+js/lib/countdown.js
+js/lib/hammer.js
+js/lib/fastclick.js
+js/lib/underscore-min.js
+js/lib/backbone-min.js
+js/lib/pageslider.js
+js/lib/iscroll.js
+js/app.js
+js/app.data.js
+js/routers/router.js
+
+
+
 
 NETWORK:
 *

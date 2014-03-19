@@ -1,0 +1,108 @@
+* {box-sizing:border-box;}
+
+/* Theming */
+
+.topcoat-navigation-bar {
+	background: #4E4E4E;
+}
+
+a {text-decoration: none; color: #FA4F45}
+
+
+.topcoat-navigation-bar__title {font-weight: 600; font-size: 2rem;text-shadow:0 1px 0 rgba(0,0,0,.2);}
+
+
+/* Destination page */
+
+/* Time */
+
+.js-time { 
+	float: right;
+}
+
+.arrow--container {
+	display: none;
+
+}
+.arrow--more {
+	font-size: 3rem;
+	text-decoration: none;
+}
+
+
+.timeleft--container {
+	width: 50%;
+	font-size: 2rem;
+}
+
+.destinationinfo--container {
+	width: 49%;
+	font-size: 1.2rem;
+}
+
+
+
+/* Table layout */
+
+.list--table {
+	display: table;
+	vertical-align: middle;
+	width: 100%;
+}
+.list--table--row {
+	display: table-row;
+}
+.list--table--cell {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Text aligning */
+
+.align--txtleft {
+	text-align: left;
+}
+.align--txtright {
+	text-align: right;
+}
+
+.align-txtcenter {
+	text-align: center;
+}
+
+/* Next busses scroller */
+
+.nextbusses--grid {
+	list-style: none;
+	margin: 1rem 0; padding: 0;
+	width: 100%;
+	overflow-x:scroll;
+	height: 4.5rem;
+	white-space: nowrap;
+}
+
+.nextbusses--grid--item {
+	width: 25%;
+	display: inline-block;
+	text-align: center;
+	padding:1em;
+	border:1px solid rgba(255,255,255,.05);
+	white-space: nowrap;
+}
+
+.nextbusses--grid--item + .nextbusses--grid--item {
+	border-left:none;
+}
+
+/*
+.nextbusses--grid--item:nth-child(4n-7) { 
+   text-align: left;
+}
+
+.nextbusses--grid--item:nth-child(4n) { 
+   text-align: right;
+}
+*/
+
+
+
