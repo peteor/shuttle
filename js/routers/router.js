@@ -1,22 +1,36 @@
 var Router = Backbone.Router.extend({
   routes: {
     'stop/:id': 'getStop',
+    'destination/add': 'addDestination',
     ''            : 'home'
   } ,
    initialize: function () {
-       shuttleApp.slider = new PageSlider($("#container"));
+       ShuttleApp.slider = new PageSlider($("#container"));
     }
 });
 
-var router = new Router();
+ShuttleApp.router = new Router();
 
-router.on('route:home', function () {
+ShuttleApp.router.on('route:home', function () {
   console.log("home");
+  // Do we have any destinations? 
+
+  if (ShuttleApp.arDestinations.length < 1) {   
+    console.log("New here ....");
+    ShuttleApp.router.navigate('destination/add', {trigger: true});
+    return true;
+  } 
   renderDestinations();
 });
 
 
-router.on('route:getStop', function (id) {
+ShuttleApp.router.on('route:getStop', function (id) {
   console.log("Load stop: " + id);
   renderStop(id);
 });
+
+ShuttleApp.router.on('route:addDestination', function () {
+  renderAddDestination();
+
+});
+

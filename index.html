@@ -69,6 +69,7 @@
   </li>
     <% }) %>
   </ul>
+  + Add a destination
   </div>
   </div>
   </div>
@@ -106,8 +107,33 @@
   </div>
   </script>
 
-  <script src="js/helpers.js"></script>
-  <script src="js/dates.js"></script>
+<script type="text/html" id='add-destination-template'>
+
+  <div class="app--header">
+  <div class="topcoat-navigation-bar">
+  
+  <div class="topcoat-navigation-bar__item center full">
+  <h1 class="topcoat-navigation-bar__title"><a href="#/" data-rel="destination-page">Shuttle</a></h1>
+  </div>
+  </div>
+  </div>
+  <div class="app--body app--body__scroll">
+  <div id="destination-container" >
+  <div class="topcoat-list">
+  <h3 class="topcoat-list__header">Add a destination</h3>
+  <ul class="topcoat-list__container">
+   <li class="topcoat-list__item">You have no destinations at the moment. Why not add one here: </li>
+ 
+  </ul>
+  </div>
+  </div>
+  </div>
+
+  </script>
+
+
+  <script src="js/appcachehandler.js"></script>
+  <script src="js/documentvis.js"></script>
   <script src="js/lib/jquery-2.1.0.min.js"></script>
   <script src="js/lib/iscroll.js"></script>
   <script src="js/lib/countdown.js"></script>
@@ -117,9 +143,17 @@
   <script src="js/lib/backbone-min.js"></script>
   <script src="js/lib/pageslider.js"></script>
   <script src="js/lib/iscroll.js"></script>
-   <script src="js/app.data.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/dates.js"></script>
+  <script src="js/startcountdown.js"></script>
+  <script src="js/showthetime.js"></script>
+  <script src="js/app.data.js"></script>
+  <script src="js/app.stophandlers.js"></script>
+  <script src="js/app.rendermethods.js"></script>
+  <script src="js/app.localstorage.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/routers/router.js" ></script>
+
+    <script src="js/routers/router.js" ></script>
 
 </body>
 </html>
