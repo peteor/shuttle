@@ -1,65 +1,65 @@
-/*
-  isAfterTime
-  filter function which compares the time of the current stop to the current date
-*/
+/**
+ * ShuttleApp.stops
+ * Methods relating to stop data handling/manipulation here
+ */
 
-function isAfterTime(element, index, array) {
+var ShuttleApp = (function (my) {
+   
+   my.stop = {};
+
+   /**
+    * isAfterTime
+    * filter function which compares the time of the current stop to the current date
+    */
+   my.stop.isAfterTime = function (element, index, array) {
     var date = new Date();
     var milliseconds = date.getTime();
-    return parseStopTime(element.time) > milliseconds;
-}
+    return my.stop.parseStopTime(element.time) > milliseconds;
+    };
 
-/*
-  getNextStops
-  filters the array of stop objects to find ones after the current time
-*/
+   /**
+    * getNextStops
+    * filters the array of stop objects using isAfterTime to find ones after the current time
+    */
+   my.stop.getNextStops = function(arStops) {
+   var arStopsFiltered = arStops.filter(my.stop.isAfterTime);
+   return arStopsFiltered;
+   };
 
-function getNextStops(arStops) {
-    var arStopsFiltered = arStops.filter(isAfterTime);
-    return arStopsFiltered;
-}
+   /**
+    * parseStopTimes
+    * stopTime = 13:00 
+    * converts a human readable time {12:22}  to a timestamp 
+    */ 
+    
+    my.stop.parseStopTime = function (stopTime) {
+        try 
+        {
+         var arStopTime = stopTime.split(":");
+        } 
+        catch(err)
+        {
+            console.log(err)
+            return false; 
+        }
+        var dStop = createStop(arStopTime[0], arStopTime[1]);
+        return dStop.getTime();
+    };
 
-/* 
-    parseStopTimes
-    stopTime = 13:00 
-    converts a human readable time {12:22}  to a timestamp 
-*/
+    /** 
+     *   nextBusAt: returns the time of the next bus
+     */
+     my.stop.nextBusAt = function(arStops) {
+        var arNextStop = my.stop.getNextStops(arStops);
+        var nextBus = (arNextStop.length >= 1 ) ? arNextStop[0].time : "";
+        return nextBus;
+    };
 
-function parseStopTime(stopTime) {
-    try 
-    {
-     var arStopTime = stopTime.split(":");
-    } 
-    catch(err)
-    {
-        console.log(err)
-        return false; 
-    }
-    var dStop = createStop(arStopTime[0], arStopTime[1]);
-    return dStop.getTime();
-}
-
-/* 
-    nextBusAt: returns the time of the next bus
-*/
-function nextBusAt(arStops) {
-    var arNextStop = getNextStops(arStops);
-    var nextBus = "";
-    try 
-    {
-        nextBus = arNextStop[0].time;
-        console.log(nextBus);
-    } 
-    catch (err)
-    {
-        nextBus = "";
-    }
-    return nextBus;
-}
-
-
-function upcomingTimes(arStops) {
-    var arNextStop = getNextStops(arStops);
+    /** 
+     *   @upcomingTimes
+     */
+    my.stop.upcomingTimes = function (arStops) {
+    var arNextStop = my.stop.getNextStops(arStops);
     var arNextBus = [];
     var nextTime = "";
     if (arNextStop.length == 0)
@@ -88,3 +88,7 @@ function upcomingTimes(arStops) {
     }
     return nextTime;
 }
+  return my;
+}(ShuttleApp || {}));
+
+

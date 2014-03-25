@@ -34,7 +34,7 @@ function startCountdown() {
             // If we reach zero second then re-render the destinations page
             if (cnt.seconds == 0) {
                 console.log("Re-rendering home page because timer hit zero");
-                renderDestinations();
+                ShuttleApp.render.destinations(); // move to callback 
             }
         }, 1000);
     });

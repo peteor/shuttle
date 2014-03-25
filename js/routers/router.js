@@ -14,23 +14,21 @@ ShuttleApp.router = new Router();
 ShuttleApp.router.on('route:home', function () {
   console.log("home");
   // Do we have any destinations? 
-
   if (ShuttleApp.arDestinations.length < 1) {   
     console.log("New here ....");
     ShuttleApp.router.navigate('destination/add', {trigger: true});
     return true;
   } 
-  renderDestinations();
+  ShuttleApp.render.destinations();
 });
 
 
 ShuttleApp.router.on('route:getStop', function (id) {
   console.log("Load stop: " + id);
-  renderStop(id);
+  ShuttleApp.render.stop(id);
 });
 
 ShuttleApp.router.on('route:addDestination', function () {
-  renderAddDestination();
-
+  ShuttleApp.render.addDestination();
 });
 

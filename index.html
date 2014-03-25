@@ -55,7 +55,7 @@
           </div>
         <div class="list--table--cell timeleft--container align--txtright js-countdown" >
 
-        <% print(nextBusAt(arDestinations[key].stops))%>
+        <% print(ShuttleApp.stop.nextBusAt(arDestinations[key].stops))%>
 
         </div>
         <!--
@@ -65,7 +65,7 @@
     </div>
   </div>
   <span>Upcoming times</span>
-<%=  upcomingTimes(arDestinations[key].stops) %>
+<%=  ShuttleApp.stop.upcomingTimes(arDestinations[key].stops) %>
   </li>
     <% }) %>
   </ul>
