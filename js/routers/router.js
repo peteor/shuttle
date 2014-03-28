@@ -14,11 +14,11 @@ ShuttleApp.router = new Router();
 ShuttleApp.router.on('route:home', function () {
   console.log("home");
   // Do we have any destinations? 
-  if (ShuttleApp.arDestinations.length < 1) {   
+  if (ShuttleApp.pickupPoints.length < 1) {
     console.log("New here ....");
     ShuttleApp.router.navigate('destination/add', {trigger: true});
     return true;
-  } 
+  }
   ShuttleApp.render.destinations();
 });
 

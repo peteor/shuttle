@@ -42,7 +42,7 @@
   <div class="app--body app--body__scroll">
   <div id="destination-container" >
   <div class="topcoat-list">
-  <h3 class="topcoat-list__header">Destinations <span class="js-time"></span></h3>
+  <h3 class="topcoat-list__header">Pickup points <span class="js-time"></span></h3>
   <ul class="topcoat-list__container">
   <% _.each(arDestinations,function(dest,key,list){ %>
 
@@ -67,9 +67,18 @@
   <span>Upcoming times</span>
 <%=  ShuttleApp.stop.upcomingTimes(arDestinations[key].stops) %>
   </li>
+
     <% }) %>
+   <li class="topcoat-list__item"> 
+     <a href="#/destination/add" data-rel="add-destination-page"> + Add a pickup point </a>
+    </li>
+
+     <li class="topcoat-list__item"> 
+      <button onclick="javascript:ShuttleApp.clearData();"> Reset App!</button> 
+    </li>
+
   </ul>
-  + Add a destination
+
   </div>
   </div>
   </div>
@@ -95,11 +104,41 @@
   <h3 class="topcoat-list__header"><%= stopName %> stop times <span class="js-time"></span></h3>
   <div class="topcoat-list__container ">
   <ul class="topcoat-list ">
+   <li class="topcoat-list__item">
+
+
+   <span style="line-height:3rem; margin-right:0.5em;display:none">New: </span>
+   <input type="time" value="12:00" class="topcoat-text-input js-add-schedule" >
+   <!--
+    <input type="number" min="0" max="23" class="topcoat-text-input" value="12"  /> 
+    <input type="text" class="topcoat-text-input "  value=":" disabled  style="width:1em;padding:0; text-align:center; border:none;"/>
+    <input type="number"  min="0" max="59" class="topcoat-text-input "  />
+   -->
+ <button class="topcoat-button js-save-schedule" >Add</button> 
+    </li>
   <% _.each(arCurrentStops,function(stop,key,list){ %>
-    <li class="topcoat-list__item">
-    <%= stop.time %>
+    <li class="topcoat-list__item" style="padding-top:0;">
+
+     <div class="list--table">
+        <div class="list--table--row">
+          <div  class="list--table--cell" style="width:80%;">
+
+    <%= stop.time %> 
+
+    </div>
+    <div  class="list--table--cell"  style="width:20%;">
+    <button class="topcoat-button js-delete-schedule-time" style="float:right;">Delete</button> 
+       </div>
+        </div>
+            </div>
     </li>
     <% }) %>
+
+   <li class="topcoat-list__item"> 
+      <button class="topcoat-button js-delete-pickup-point" > - Delete pickup point</button> 
+    </li>
+
+
   </ul>
   </div>
   </div>
@@ -120,10 +159,11 @@
   <div class="app--body app--body__scroll">
   <div id="destination-container" >
   <div class="topcoat-list">
-  <h3 class="topcoat-list__header">Add a destination</h3>
+  <h3 class="topcoat-list__header">Add a pickup point</h3>
   <ul class="topcoat-list__container">
-   <li class="topcoat-list__item">You have no destinations at the moment. Why not add one here: </li>
- 
+   <li class="topcoat-list__item">Enter the name of the pickup point to begin: </li>
+  <li class="topcoat-list__item"><input type="text" class="topcoat-text-input js-add-pickup-point" />
+   <button class="topcoat-button js-save-pickup" disabled>Save Point and add stops</button> </li>
   </ul>
   </div>
   </div>
@@ -146,14 +186,16 @@
   <script src="js/helpers.js"></script>
   <script src="js/dates.js"></script>
   <script src="js/startcountdown.js"></script>
-  <script src="js/showthetime.js"></script>
+  <script src="js/digitalclock.js"></script>
   <script src="js/app.data.js"></script>
-  <script src="js/app.stophandlers.js"></script>
-  <script src="js/app.rendermethods.js"></script>
+  <script src="js/app.stops.js"></script>
+  <script src="js/app.render.js"></script>
   <script src="js/app.localstorage.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/routers/router.js" ></script>
+  <script src="js/app.pickuppoints.js"></script>
+  <script src="js/app.schedule.js"></script>
 
-    <script src="js/routers/router.js" ></script>
 
 </body>
 </html>

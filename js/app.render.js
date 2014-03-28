@@ -4,19 +4,31 @@
 
 var ShuttleApp = (function(my) {
     // The module to return 
-
     my.render = {};
 
     /**
      * @destinations
-     *
+     * Render the destinations page, and show the time on it. 
      */
     my.render.destinations = function() {
+        // Hacky....
+        // Only draw this page if we are currently on the homepage
+        if (Backbone.history.fragment !== "") {
+            return false;
+        }
+
         console.log("Rendering destinations");
         my.render.view("#destination-template", {
-            arDestinations: my.arDestinations
-        }, startCountdown);
-        ShowTheTime("js-time");
+            arDestinations: my.pickupPoints
+        },runTimers);
+        
+        /* Helper function to make sure both timers are rendered after the destination page */
+         function runTimers() {
+            var digClock = new DigitalClock("js-time");
+            digClock.showTime();
+            var theCount = new StartCountdown(my.render.destinations);
+            theCount.count();
+         }
     };
 
     /**
@@ -35,8 +47,8 @@ var ShuttleApp = (function(my) {
     my.render.stop = function(id) {
         console.log("rendering stop");
         // Prepare data
-        var nextStops = my.arDestinations[id].stops;
-        var stopName = my.arDestinations[id].name;
+        var nextStops = my.pickupPoints[id].stops;
+        var stopName = my.pickupPoints[id].name;
         // Render
         my.render.view("#stop-template", {
             arCurrentStops: nextStops,

@@ -22,15 +22,22 @@ var ShuttleApp = (function (my) {
     * filters the array of stop objects using isAfterTime to find ones after the current time
     */
    my.stop.getNextStops = function(arStops) {
-   var arStopsFiltered = arStops.filter(my.stop.isAfterTime);
-   return arStopsFiltered;
+    var arStopsFiltered = arStops.filter(my.stop.isAfterTime);
+    return arStopsFiltered;
+   };
+
+   my.stop.sortByTime = function(arStops) {
+    var arSortedStopTimes = _.sortBy(arStops, function(o) { return o.time; });
+    console.log("sorted");
+    console.log(arSortedStopTimes);
+    return arSortedStopTimes;
    };
 
    /**
     * parseStopTimes
     * stopTime = 13:00 
     * converts a human readable time {12:22}  to a timestamp 
-    */ 
+    */
     
     my.stop.parseStopTime = function (stopTime) {
         try 
