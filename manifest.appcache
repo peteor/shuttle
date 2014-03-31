@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-##
+#############################
 
 CACHE:
 
@@ -36,9 +36,13 @@ js/lib/iscroll.js
 js/app.js
 js/app.data.js
 js/routers/router.js
-
+js/app.pickuppoints.js
+js/app.schedule.js
+js/lib/jquery.confirmer.js
+js/lib/noti.js
 
 
 
 NETWORK:
 *
+#############################

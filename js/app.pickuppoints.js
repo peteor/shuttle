@@ -45,6 +45,7 @@ $("body").on( "blur", ".js-add-pickup-point", function() {
 $("body").on( "click", ".js-save-pickup", function() {
   var pointToAdd = $(".js-add-pickup-point").val();
   ShuttleApp.addPickupPoint(pointToAdd);
+   Noti.setNoti({type:"added", text: "New point: " + pointToAdd + " added"});
   handlePickUpPoint.renderSavePickup();
 });
 

@@ -1,5 +1,8 @@
 * {box-sizing:border-box;}
 
+
+.w100 {width: 100%;}
+
 /* Theming */
 
 .topcoat-navigation-bar {
@@ -104,5 +107,46 @@ a {text-decoration: none; color: #FA4F45}
 }
 */
 
+/* Time input */
 
+input[type="time"] {height: 3em;}
+
+/* Notifications */
+
+.notification {
+	display: none;
+	position: fixed; bottom: 0;left: 0; z-index: 500;
+}
+
+
+.notification__added .topcoat-list {
+	 background:#e9ffd9;
+	 border:1px solid #a6ca8a;
+	 color: green;
+	 padding: 0.5rem;
+	 text-align: right;
+	 font-style: italic;
+	 
+
+}
+
+.notification__error .topcoat-list {
+	background: #ffecec ;
+	border:1px solid #f5aca6;
+	padding: 0.5rem;
+	text-align: right;
+	font-style: italic;
+	color: red;
+
+
+}
+
+.notification__deleted .topcoat-list {
+	background: #ffecec ;
+	border:1px solid #f5aca6;
+	padding: 0.5rem;
+	text-align: right;
+	font-style: italic;
+	color: red;
+}
 

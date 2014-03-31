@@ -4,10 +4,6 @@
  * todo - deep dive this as I've just copied it from the pickup points...
  */
 
-$("body").on( "blur", ".js-add-schedule", function() {
-
-});
-
 
 $("body").on( "change", ".js-add-schedule", function() {
   var scheduleToAdd = $(".js-add-schedule").val();
@@ -37,10 +33,35 @@ $("body").on( "click", ".js-save-schedule", function() {
 /** 
  * Delete a schedule time
  * Todo - abstract into method, 
- */
 
 $("body").on( "click", ".js-delete-schedule-time", function() {
-  console.log("Deleting schedule time");
+  
+});
+
+
+$("body").on( "click", ".js-delete-pickup-point", function() {
+
+});
+*/
+
+function deletePickupPoint () {
+  console.log("Deleting Pickup point");
+  var arPickupPointId = Backbone.history.fragment.split("/").reverse();
+  var pickupPointId = arPickupPointId[0];
+   ShuttleApp.pickupPoints.splice(pickupPointId, 1);
+   // Re save the app data back to local storage
+  localStorage.setItem("pickupPoints",JSON.stringify(ShuttleApp.pickupPoints));
+   Noti.setNoti({type:"deleted", text: "Point deleted"});
+  // Back to destinations page 
+  ShuttleApp.router.navigate('#/', {trigger: true});
+}
+
+
+
+/* */
+
+function deleteScheduleTime () {
+console.log("Deleting schedule time");
   var arPickupPointId = Backbone.history.fragment.split("/").reverse();
   var pickupPointId = arPickupPointId[0];
   // Find which item in the list has been clicked
@@ -52,23 +73,10 @@ $("body").on( "click", ".js-delete-schedule-time", function() {
    // Re save the app data back to local storage
   localStorage.setItem("pickupPoints",JSON.stringify(ShuttleApp.pickupPoints));
   // Re-render 
+  Noti.setNoti({type:"deleted", text: "Time deleted"});
   ShuttleApp.render.stop(pickupPointId);
-});
 
-$("body").on( "click", ".js-delete-pickup-point", function() {
-  console.log("Deleting Pickup point");
-  var arPickupPointId = Backbone.history.fragment.split("/").reverse();
-  var pickupPointId = arPickupPointId[0];
-  
-   ShuttleApp.pickupPoints.splice(pickupPointId, 1);
-
-   // Re save the app data back to local storage
-  localStorage.setItem("pickupPoints",JSON.stringify(ShuttleApp.pickupPoints));
-  // Back to destinations page 
-  ShuttleApp.router.navigate('#/', {trigger: true});
- 
-});
-
+}
 
 var handleSchedule = {
    prevValue : "",
@@ -134,7 +142,7 @@ var handleSchedule = {
 
     // Re save the app data back to local storage
     localStorage.setItem("pickupPoints",JSON.stringify(ShuttleApp.pickupPoints));
-
+    Noti.setNoti({type:"added", text: stopTime + " added"});
     // Re-render
     ShuttleApp.render.stop(pickupPointId);
 
@@ -148,6 +156,7 @@ var handleSchedule = {
     */
    renderfailsValidation : function (msg) {
     console.log("You've failed validation" + msg);
+    Noti.setNoti({type:"error", text: "Failed validation"});
    },
    /**
     * What to do if it passes validation

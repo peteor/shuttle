@@ -20,14 +20,15 @@ var ShuttleApp = (function(my) {
         console.log("Rendering destinations");
         my.render.view("#destination-template", {
             arDestinations: my.pickupPoints
-        },runTimers);
+        },postLoad);
         
         /* Helper function to make sure both timers are rendered after the destination page */
-         function runTimers() {
+         function postLoad() {
             var digClock = new DigitalClock("js-time");
             digClock.showTime();
             var theCount = new StartCountdown(my.render.destinations);
             theCount.count();
+         
          }
     };
 
@@ -54,6 +55,9 @@ var ShuttleApp = (function(my) {
             arCurrentStops: nextStops,
             stopName: stopName
         });
+
+        $(".js-delete-schedule-time").confirmer({confirmed : deleteScheduleTime});
+        $(".js-delete-pickup-point").confirmer({confirmed : deletePickupPoint});
     };
 
     /**
@@ -68,7 +72,10 @@ var ShuttleApp = (function(my) {
         my.slider.slidePage($div);
         if (typeof callback !== 'undefined') {
             callback();
-        };
+        }
+        // Run notification if set
+        setTimeout(function(){ Noti.runNoti();},300);
+       
     };
 
     return my;
