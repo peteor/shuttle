@@ -29,7 +29,7 @@ var ShuttleApp = (function (my) {
     {
       // No points in local storage - lets set some up
       defaultPickupPoints = [royalView, tseunWanMTR]; // royalView, tseunWanMTR
-      localStorage.setItem("pickupPoints", JSON.stringify(defaultPickupPoints));
+      // localStorage.setItem("pickupPoints", JSON.stringify(defaultPickupPoints));
       // console.log("Seting default pickup points");
       pickupPoints = defaultPickupPoints;
     }
