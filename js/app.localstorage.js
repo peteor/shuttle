@@ -1,10 +1,4 @@
-// check if ls supported
-// is there an app data key in ls?
-  // If not create empty one
-    // render add destination screen
-    // after destination added render add stop screen
 
-// if so load it and use it to populate an array of destinations
 
 var ShuttleApp = (function (my) {
 
@@ -28,10 +22,10 @@ var ShuttleApp = (function (my) {
     else
     {
       // No points in local storage - lets set some up
-      defaultPickupPoints = [royalView, tseunWanMTR]; // royalView, tseunWanMTR
+      // defaultPickupPoints = [royalView, tseunWanMTR]; // royalView, tseunWanMTR
       // localStorage.setItem("pickupPoints", JSON.stringify(defaultPickupPoints));
       // console.log("Seting default pickup points");
-      pickupPoints = defaultPickupPoints;
+       pickupPoints =[];
     }
     // var dest =  [royalView, tseunWanMTR];
     return pickupPoints;
